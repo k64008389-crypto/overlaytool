@@ -1,4 +1,4 @@
-herepackage com.example.overlaytool;
+package com.example.overlaytool;
 
 import android.app.Activity;
 import android.content.Intent;
