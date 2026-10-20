@@ -1,4 +1,4 @@
-package com.example.overlaytool;
+herepackage com.example.overlaytool;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int REQ_OVERLAY = 1001;
     private static final int REQ_CAPTURE = 1002;
+    private static final int REQ_NOTIF = 1003;
 
     private MediaProjectionManager projectionManager;
 
@@ -25,6 +26,13 @@ public class MainActivity extends AppCompatActivity {
 
         projectionManager = (MediaProjectionManager)
                 getSystemService(MEDIA_PROJECTION_SERVICE);
+
+        // Запрос разрешения на уведомления для Android 13+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, REQ_NOTIF);
+            }
+        }
 
         Button startBtn = new Button(this);
         startBtn.setText("Запустить");
